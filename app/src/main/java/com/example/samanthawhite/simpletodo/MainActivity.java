@@ -1,6 +1,8 @@
 package com.example.samanthawhite.simpletodo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int EDIT_REQUEST_CODE = 20;
+
+    public static final String ITEM_TEXT = "itemText";
+    public static final String ITEM_POSITION = "itemPosition";
+
 
     ArrayList<String> items;
     ArrayAdapter<String> itemsAdapter;
@@ -30,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        lvItems = (ListView) findViewById(R.id.lvItems);
+
 
         readItems();
 
         itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
-
+        lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(itemsAdapter);
 
 
@@ -53,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         String itemText = etNewItem.getText().toString();
         itemsAdapter.add(itemText);
         etNewItem.setText("");
+        writeItems();
 
         //display a notifcation to the user
         Toast.makeText(getApplicationContext(), "Item added to list", Toast.LENGTH_SHORT).show();
@@ -73,6 +81,37 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent i = new Intent(MainActivity.this, EdititemActivity.class);
+
+                i.putExtra(ITEM_TEXT, items.get(position));
+                i.putExtra(ITEM_POSITION, position);
+
+
+                startActivityForResult(i, EDIT_REQUEST_CODE);
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == EDIT_REQUEST_CODE){
+            String updatedItem = data.getExtras().getString(ITEM_TEXT);
+
+            int position = data.getExtras().getInt(ITEM_POSITION, 0);
+
+            items.set(position, updatedItem);
+
+            writeItems();
+
+            Toast.makeText(this," Item updated", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     private File getDatafile() {
@@ -81,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void readItems() {
         try {
-            items = new ArrayList<String>(FileUtils.readLines(getDatafile(), Charset.defaultCharset()));
+            items = new ArrayList<>(FileUtils.readLines(getDatafile(), Charset.defaultCharset()));
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("MainActivity", "Error reading file", e);
             items = new ArrayList<>();
         }
     }
@@ -92,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileUtils.writeLines(getDatafile(), items);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("MainActivity", "Error reading file", e);;
         }
 
     }
