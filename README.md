@@ -8,19 +8,19 @@ A simple to do list app
 
 Submitted by: **Samantha White**
 
-Time spent: **3** hours spent in total
+Time spent: **5.5** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [ ] User can **view a list of todo items**
-* [ ] User can **successfully add and remove items** from the todo list
-* [ ] User's **list of items persisted** upon modification and and retrieved properly on app restart
+* [x] User can **view a list of todo items**
+* [x] User can **successfully add and remove items** from the todo list
+* [x] User's **list of items persisted** upon modification and and retrieved properly on app restart
 
 The following **optional** features are implemented:
 
-* [ ] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list
+* [x] User can **tap a todo item in the list and bring up an edit screen for the todo item** and then have any changes to the text reflected in the todo list
 
 The following **additional** features are implemented:
 
@@ -30,13 +30,17 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Walkthrough](Gifsimpletodo.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+I found it kind of difficult to really take in all of the concepts while also creating the app in the compressed amount of time. I plan to review some of the additional readings tonight to make sure I fully understand everything that we implemented. 
+
+Also in the GIF there seems to be a delay between the name change in the optional feature but during normal running there doesn't seem to be a problem. 
 
 ## License
 
