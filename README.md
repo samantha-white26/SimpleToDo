@@ -40,6 +40,7 @@ Describe any challenges encountered while building the app.
 
 I found it kind of difficult to really take in all of the concepts while also creating the app in the compressed amount of time. I plan to review some of the additional readings tonight to make sure I fully understand everything that we implemented. 
 
+Also in the GIF there seems to be a delay between the name change in the optional feature but during normal running there doesn't seem to be a problem. 
 
 ## License
 
